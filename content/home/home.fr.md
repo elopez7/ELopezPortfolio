@@ -1,7 +1,7 @@
 +++
 title = "Accueil"
 type = "home"
-draft = false
+draft = true
 +++
 
 {{< showcase-section
