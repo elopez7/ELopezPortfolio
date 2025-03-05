@@ -1,6 +1,7 @@
 ---
 title: 'Printable CV'
 hideTitle: true
+draft: true
 ---
 
 ℹ This page is a demo of the printer-friendly output of the theme. You can find the source code in the demo repo (https://raw.githubusercontent.com/zetxek/adritian-demo/refs/heads/main/content/cv.md). Try printing it directly from your browser! 
