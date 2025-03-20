@@ -9,7 +9,7 @@ tags = ["storytelling", "posts", "articles"]
     featured_image = "/img/blog/tension.jpg"
 +++
 
-![Story arc](/img/blog/tension.jpg)
+![tension](/img/blog/tension.jpg)
 Welcome to part two of the Storytelling for beginners series.
 
 ## The Secret to Engagement

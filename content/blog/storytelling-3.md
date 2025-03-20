@@ -9,7 +9,7 @@ tags = ["storytelling", "posts", "articles"]
     featured_image = "/img/blog/journey.jpg"
 +++
 
-![Story arc](/img/blog/journey.jpg)
+![journey](/img/blog/journey.jpg)
 Welcome to the final part of the Storytelling for Beginners series.
 # Your Greatest Tool
 
