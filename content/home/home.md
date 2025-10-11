@@ -54,9 +54,10 @@ draft = false
 {{< experience-list >}}
 -->
 
+<!--
 {{< client-and-work-section
     title="Technologies I use and some of my work" >}} 
-
+-->
 <!--
 {{< testimonial-section
     title="What they say about me" >}}
