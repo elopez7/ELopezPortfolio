@@ -1,5 +1,5 @@
 +++
-title = "Input Basics In C++ Part 1"
+title = "Input Basics In C++ Part 1 - Introduction"
 date = "2025-09-18T18:44:42+02:00"
 draft = false
 type = "blog"
