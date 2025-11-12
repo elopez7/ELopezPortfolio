@@ -292,7 +292,7 @@ int main() {
   return 0;
 }
 ```
-But this approach has an obvious flaw: the program only accepts one number before it ends, which makes for a pretty useless calculator. We need a way to keep asking for numbers until the user decides they're done. In the next section, we'll see how we can cleverly use the stream's state to achieve just that.
+But this approach has an obvious flaw: the program only accepts one number before it ends, which makes for a pretty useless calculator. We need a way to keep asking for numbers until the user decides they're done. In the next section, we'll see how we can use the stream's state to achieve just that.
 
 
 # References / Sources
