@@ -27,6 +27,10 @@ Like with our unit converter, let's start by breaking down the problem. The core
 Often called the container of choice in C++, you can think of a `std::vector` as a dynamic, ordered row of storage boxes.
 A vector lets you add new boxes, remove old ones, and find a specific box in the row. For our program, every time the user enters a number, we'll add a new 'box' to our vector to store it. There's a lot more to `std::vector`, but since this post focuses on input, a deep dive into containers will have to wait.
 
+**Under the Hood**: A vector stores elements in contiguous memory (like an array), 
+but automatically resizes when it runs out of space. This makes it cache-friendly 
+and fast for sequential access—topics we'll explore when discussing performance.
+
 For now, all we need to do is include the header:
 ```cpp
 #include <vector>
@@ -39,7 +43,7 @@ Of course, just like with `iostream`, including the header isn't enough. We also
 //This function is the entry point of the application.
 int main()
 {
-    std::vector<float> numbers{};
+    std::vector<double> numbers{};
     return 0;
 }
 ```
@@ -58,7 +62,7 @@ int main()
     std::string username{};
     std::cin >> username;
     std::cout << username << ", please enter the numbers you want to calculate the mean for.\n";
-    std::vector<float> numbers{};
+    std::vector<double> numbers{};
     return 0;
 }
 ```
@@ -84,8 +88,8 @@ int main() {
   std::string username{};
   std::cin >> username;
   std::cout << username << ", please enter the numbers you want to calculate the mean for.\n";
-  std::vector<float> numbers{};
-  float number{};
+  std::vector<double> numbers{};
+  double number{};
   std::cout << username << " please enter a number to be stored: ";
   std::cin >> number;
   std::cout << username << ", the number you entered was: " << number;
@@ -94,7 +98,9 @@ int main() {
 ```
 Now we are asking the user for a single number, but watch what happens when we run it with a full name:
 ![Mean Error 2](/img/blog/mean_error_2.gif)
-<Br>The program doesn't even wait for us to enter a number! That's because when `std::cin >> number` executes, it sees that " Lopez" is still in the input buffer. It tries to store that string in our `float` variable, which fails, the program continues, and it prints the default value of `number`, which is zero.
+<Br>The program doesn't even wait for us to enter a number! That's because when `std::cin >> number` executes, it sees that " Lopez" is still in the input buffer. It tries to store that string in our `double` variable, which fails. Because we initialized `number` with `double number{};`, it starts at zero and the failed extraction leaves it unchanged. The program continues and prints zero.
+
+**Why Brace-Initialization Matters**: Using `double number{}` guarantees zero-initialization. Without the braces (`double number`), an uninitialized variable contains garbage. When input fails, this garbage would be printed. A subtle but critical bug.
 
 ### Taking Care of the Buffer
 We have a few ways to solve this. One common approach is to clear the leftover data from the buffer before we ask for the next input. We can do this with a handy function: `std::cin.ignore()`. By default, `ignore()` discards only a single character. To clear the entire buffer, we need to tell it to ignore a very large number of characters.
@@ -105,6 +111,7 @@ Here is the updated program.
 ```cpp
 #include <iostream>  
 #include <vector>  
+#include <limits>
 
 // This function is the entry point of the application.
 int main() {
@@ -113,8 +120,8 @@ int main() {
   std::cin >> username;
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   std::cout << username << ", please enter the numbers you want to calculate the mean for.\n";
-  std::vector<float> numbers{};
-  float number{};
+  std::vector<double> numbers{};
+  double number{};
   std::cout << username << " please enter a number to be stored: ";
   std::cin >> number;
   std::cout << username << ", the number you entered was: " << number;
@@ -129,7 +136,7 @@ C++ provides more than one way to get user input. So far, we've used `std::cin >
 std::string str{};
 std::getline(std::cin, str);
 ```
-The code above creates a `std::string` that will store the entire line of user input. Let's integrate this into our program.
+By default, `std::getline()` extracts until it encounters `\n` (newline), which is then discarded. This is why we don't need `ignore()` after `getline`. The newline is already consumed. Unlike `operator>>`, `getline` doesn't skip leading whitespace.
 ```cpp
 #include <iostream>
 #include <string>
@@ -141,8 +148,8 @@ int main() {
   std::string username{};
   std::getline(std::cin, username);
   std::cout << username << ", please enter the numbers you want to calculate the mean for.\n";
-  std::vector<float> numbers{};
-  float number{};
+  std::vector<double> numbers{};
+  double number{};
   std::cout << username << " please enter a number to be stored: ";
   std::cin >> number;
   std::cout << username << ", the number you entered was: " << number;
@@ -176,9 +183,9 @@ int main() {
   std::string username{};
   std::getline(std::cin, username);
   std::cout << username << ", please enter the numbers you want to calculate the mean for.\n";
-  std::vector<float> numbers{};
+  std::vector<double> numbers{};
   std::cout << username << " please enter a number to be stored: ";
-  float number{};
+  double number{};
   while (!(std::cin >> number)) {
     std::cout << username << ", the value you entered is not a number!\n";
   }
@@ -201,7 +208,7 @@ This flag indicates that everything is OK and that regular input operations can 
 This flag is set when the program tries to read past the end of a file.
 
 #### failbit
-This flag is set when an I/O operation fails, most commonly when you try to read data into an incompatible variable type—like trying to store "FortyTwo" in a `float`, which is exactly what's happening in our program.
+This flag is set when an I/O operation fails, most commonly when you try to read data into an incompatible variable type—like trying to store "FortyTwo" in a `double`, which is exactly what's happening in our program.
 
 #### badbit
 This flag signals a serious, often unrecoverable error, like data loss or a corrupted stream.
@@ -219,9 +226,9 @@ int main() {
   std::string username{};
   std::getline(std::cin, username);
   std::cout << username << ", please enter the numbers you want to calculate the mean for.\n";
-  std::vector<float> numbers{};
+  std::vector<double> numbers{};
   std::cout << username << " please enter a number to be stored: ";
-  float number{};
+  double number{};
   while (!(std::cin >> number)) {
     std::cout << username << ", the value you entered is not a number!\n";
     std::cin.clear();
@@ -238,6 +245,7 @@ int main() {
 #include <iostream> 
 #include <string>
 #include <vector>  
+#include <limits>
 
 // This function is the entry point of the application.
 int main() {
@@ -245,9 +253,9 @@ int main() {
   std::string username{};
   std::getline(std::cin, username);
   std::cout << username << ", please enter the numbers you want to calculate the mean for.\n";
-  std::vector<float> numbers{};
+  std::vector<double> numbers{};
   std::cout << username << " please enter a number to be stored: ";
-  float number{};
+  double number{};
   while (!(std::cin >> number)) {
     std::cout << username << ", the value you entered is not a number!\n";
     // 1. Clear the error flags
@@ -278,9 +286,9 @@ int main() {
   std::string username{};
   std::getline(std::cin, username);
   std::cout << username << ", please enter the numbers you want to calculate the mean for.\n";
-  std::vector<float> numbers{};
+  std::vector<double> numbers{};
   std::cout << username << " please enter a number to be stored: ";
-  float number{};
+  double number{};
   while (!(std::cin >> number)) {
     std::cout << username << ", the value you entered is not a number!\n";
     std::cin.clear();
