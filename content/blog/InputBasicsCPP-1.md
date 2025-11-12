@@ -54,7 +54,7 @@ In this case, we will write a number.
 int main()
 {
     int number{50};
-    std::cout << number << std::endl;
+    std::cout << number << '\n';
     return 0;
 }
 ```
@@ -93,7 +93,8 @@ But just including the header file doesn't change anything on its own. We need t
 #include <iostream>
 #include <string>
 
-int main() {
+int main() 
+{
   std::string username{};
   std::cout << "Please, tell me your name and press the enter key: ";
   std::cin >> username;
@@ -116,7 +117,8 @@ Now, let's translate this into code. We don't need to start from scratch; we can
 #include <iostream>
 #include <string>
 
-int main() {
+int main() 
+{
   std::cout << "Welcome to this simple meters to feet converter, please tell "
                "me your name and press the enter key: ";
   std::string username{};
@@ -124,9 +126,9 @@ int main() {
   std::cout
       << "Hello " << username
       << "! Please enter the number of meters you want to convert into feet: ";
-  float meter_units{};
+  double meter_units{};
   std::cin >> meter_units;
-  float converted_units{meter_units * 3.28f};
+  double converted_units{meter_units * 3.28084};
   std::cout << meter_units << " meters are " << converted_units << " feet\n";
   std::cout << "Thank you for using this program!\n";
   return 0;
@@ -134,7 +136,9 @@ int main() {
 ```
 ![Meters to Feet](/img/blog/meterstofeet.gif)
 <Br>Now we have a working program that does exactly what we set out to do.
-There are still some issues, though. The program doesn't validate the input, so if a user enters a letter instead of a number, something unexpected will happen. Similarly, the program will behave unexpectedly if the user enters a first and last name (with a space). Furthermore, the program only runs once. We'll tackle these issues in the next part of this series.
+There are still some issues, though. The program doesn't validate the input, so if a user enters a letter instead of a number, something unexpected will happen.
+If a user enters "John Doe", `std::cin >> username` will only read "John" (stopping at whitespace), leaving "Doe" in the input buffer for the next `std::cin` operation. In [Part 2](InputBasicsCPP-2) we'll use `std::getline()` to read entire lines. 
+Finally, the program only runs once. We'll tackle these issues in the next part of this series.
 # References / Sources
 
 - [C++ Standard Library](https://en.cppreference.com/w/cpp/standard_library.html)
