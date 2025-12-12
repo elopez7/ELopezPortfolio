@@ -6,10 +6,10 @@ type = "blog"
 tags = ["programming", "posts", "articles", "C++", "input"]
 
 [images]
-    featured_image = "/img/blog/inputbasics.jpeg"
+    featured_image = "/img/blog/input_calculation.jpeg"
 +++
 
-![Input Validation](/img/blog/input_validation.png)
+![Input Validation](/img/blog/input_calculation.jpeg)
 In [Part 2](InputBasicsCPP-2) we covered some basic principles about standard input in C++, we talked about the `input buffer stream`, the `iostate` and some mechanisms that the C++ programming language provides us with to get input from users. We ended with a program that takes input from users and stores them, but that had the fatal flaw of only being able to store a single number, which really doesn't make for a good calculator, does it?
 So here are a few changes.
 
