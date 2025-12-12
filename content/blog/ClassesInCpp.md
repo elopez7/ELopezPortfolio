@@ -17,7 +17,7 @@ Implement a fixed-size Ring buffer (ring_buffer<T, N>) with complete iterator su
 
 # What is a Ring Buffer?
 A ring buffer (also called circular buffer) is a fixed-size data structure that overwrites its oldest elements when full. Imagine a Ring track where a writer chases a reader. When the writer catches up, the oldest data gets overwritten.
-![Ring Buffer](/img/blog/RingBuffer.jpg)
+![Ring Buffer](/img/blog/CircularBuffer.jpg)
 
 This is a useful container type, popular in logging systems, audio/video streaming and other fields. A ring buffer is used when the only thing you care about is recent data and you have memory constraints.
 
