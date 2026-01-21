@@ -1,7 +1,7 @@
 ---
 date: '2024-08-25T09:53:42+02:00' # date in which the content is created - defaults to "today"
 title: 'Meteo'
-draft: false # set to "true" if you want to hide the content 
+draft: true # set to "true" if you want to hide the content 
 
 link: "https://meteo4.netlify.app/" # optional URL to link the logo to
 
