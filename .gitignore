@@ -23,6 +23,10 @@ Thumbs.db
 # Log files
 *.log
 
+# Claude Code
+CLAUDE.md
+.claude/
+
 # Executable may be added to repository
 hugo.exe
 hugo.darwin

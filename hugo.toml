@@ -113,10 +113,10 @@ weight = 2
 name = 'Portfolio'
 URL = '#portfolio'
 weight = 3
-#  [[languages.en.menus.header]]
-#  name = "Experience"
-#  URL = "#experience"
-#  weight = 4
+[[languages.en.menus.header]]
+name = "Experience"
+URL = "#experience-single"
+weight = 4
 
 [[languages.en.menus.header]]
 name = "Posts"
