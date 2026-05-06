@@ -22,7 +22,6 @@ We're going to build a mean calculator. This program will let a user enter as ma
 Like with our unit converter, let's start by breaking down the problem. The core requirement is handling a series of numbers from the user. They can enter as many values as they like. This tells us we need a place to store these numbers as they come in. A simple variable won't do; we need a container. In C++, the go-to choice for this is the `std::vector`.
 
 ### What is a Vector?
-![vector](/img/blog/storagebox.jpeg)
 
 Often called the container of choice in C++, you can think of a `std::vector` as a dynamic, ordered row of storage boxes.
 A vector lets you add new boxes, remove old ones, and find a specific box in the row. For our program, every time the user enters a number, we'll add a new 'box' to our vector to store it. There's a lot more to `std::vector`, but since this post focuses on input, a deep dive into containers will have to wait.
