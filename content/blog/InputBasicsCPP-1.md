@@ -12,15 +12,14 @@ tags = ["programming", "posts", "articles", "C++", "input"]
 ![Input Basics](/img/blog/inputbasics.jpeg)
 In your programming journey, have you ever reached a point where you feel overwhelmed with everything a language can do, leaving you unsure of what to learn first or which features are truly important? I find myself in that exact situation. With each new C++ standard, I feel like I'm falling behind. Here we are in 2025, and I'm still trying to master move semantics and how to best use smart pointers. Learning a language with a rich history like C++ can be grueling. I've noticed I often get mesmerized by what's new, shiny, and exciting, causing me to neglect the fundamentals.
 That's what this post is about: practicing some of the fundamentals of the language and its standard library.
-In this new series, I will explore the basics of the <iostream> library.
+In this new series, I will explore the basics of the `<iostream>` library.
 
 ## The Project.
 I'll create a simple unit converter to illustrate the fundamental ways of getting user input and displaying output.
 The program will convert from meters to feet.
 The program will only run once and won't validate incorrect input. We'll add those features in the future. But first, let's cover a few key concepts.
 
-## Including the Input/Output Library to the Project.
-![Standard Library](/img/blog/standardlibrary.jpeg)
+## Including the Input/Output Library in the Project.
 To handle input and output operations, we must first tell the compiler that we intend to use the input/output library, a core part of the C++ Standard Library. The Standard Library is a collection of components that have been built, tested, and optimized over many years. These components exist because developers noticed that all programs, despite their differences, perform common operations like reading files, printing to the screen, and taking keyboard input. It was created so that we can all use these pre-built components without having to write them from scratch. A popular metaphor is to view each library component as a Lego set. In our case, we'll be using the `<iostream>` library. This library provides the facilities for our programs to do interesting things, such as communicating with other devices or formatting data. For this particular program, we are interested in `std::cin` for basic input and `std::cout` for basic output.
 To include the library, we just need to add a single line at the top of our file.
 ```cpp
@@ -41,7 +40,6 @@ Great! We now have a working program that does absolutely nothing. Still, a work
 Now it's time to make it interesting.
 
 ## What Are Streams?
-![Streams](/img/blog/streams.jpeg)
 Streams are a core concept in the `iostream` library. They represent the idea of data as a flow, typically a sequence of characters. Based on this abstraction, we can say that data "flows" into a stream during input operations and "flows" out of a stream during output operations. Think of it like a river, but instead of water, it carries a potentially infinite supply of characters (like letters and numbers). Data can flow into or out of this stream.
 
 ## Console Output
@@ -83,7 +81,6 @@ If we showed this program to someone, all they would see is a blank window with 
 Out of curiosity, they might type a number and press Enter, only to see that same number printed back. What's the point? Although we've moved a step forward in our quest to understand input and output, we still need to do a little more work to make our program useful. The next step is to include another library in our program.
 
 ## The C++ String Library
-![String Library](/img/blog/stringlib.jpeg)
 A string in C++ is the Standard Library's way of handling and storing text. Much like the `number` variable we've been using, a string can be thought of as a variable that holds a sequence of characters, such as a word or a sentence. To use strings, we need to include the string library in our project.
 ```cpp
 #include <string>
