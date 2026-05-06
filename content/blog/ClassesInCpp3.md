@@ -69,7 +69,6 @@ private:
     std::size_t tail_;                         //Index of next write position
     std::size_t count_;                //Total number of elements in the buffer
 };
-
 #endif // RINGBUFFER_H
 ```
 For the most part this is what we would need to do to make the RingBuffer into a template, but there is a small detail. If you remember in the original buffer we had divided code between a header file `.h` and an implementation file `.cpp` which usually it is a good thing to do, but not for templates.
@@ -163,7 +162,6 @@ private:
     std::size_t tail_;              //Index of next write position
     std::size_t count_;             //Total number of elements in the buffer
 };
-
 #endif // RINGBUFFER_H
 ```
 The above normally is acceptable when you have a simple type or simple functions, but when you work in a large project with a large codebase, this approach becomes a nightmare to read and to follow, luckily we have an alternative, we can put the definitions in the same `.h` file, but outside the class, consider:
@@ -271,7 +269,6 @@ std::size_t RingBuffer<T>::size() const
 {
     return count_;
 }
-
 #endif // RINGBUFFER_H
 
 ```
@@ -390,8 +387,6 @@ std::size_t RingBuffer<T, N>::size() const
 {
     return count_;
 }
-
-
 #endif // RINGBUFFER_H
 ```
 # Seeing it in Action
@@ -435,3 +430,8 @@ Position: 0 Position: 1 Position: 2 Position: 3 Position: 4
 
 # Next Steps
 Our buffer stores anything and it can be of any size, but it doesn't fully behave like any of the built in types from the `STL`, we can't use something like `for (auto x : buffer)` and we will take care of that in the next post.
+
+# References / Sources
+- [Class Templates - cppreference](https://en.cppreference.com/cpp/language/class_template)
+- [Non-type template parameters - cppreference](https://en.cppreference.com/cpp/language/template_parameters)
+- [std::size_t - cppreference](https://en.cppreference.com/cpp/types/size_t)
