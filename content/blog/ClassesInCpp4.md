@@ -6,10 +6,10 @@ type = "blog"
 tags = ["programming", "posts", "articles", "C++", "classes"]
 
 [images]
-    featured_image = "/img/blog/class.jpeg"
+    featured_image = "/img/blog/ringbuffer4.jpg"
 +++
 
-![class](/img/blog/class.jpeg)
+![class](/img/blog/ringbuffer4.jpg)
 In [Part 3](ClassesInCpp3) we expanded on the original buffer and it now supports any type and any size. Our RingBuffer almost behaves like any of the `STL` types, such as `std::vector` and I say almost. Consider the following code:
 ```cpp
 int main()

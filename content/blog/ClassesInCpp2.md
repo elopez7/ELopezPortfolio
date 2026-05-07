@@ -6,10 +6,10 @@ type = "blog"
 tags = ["programming", "posts", "articles", "C++", "classes"]
 
 [images]
-    featured_image = "/img/blog/rinbuffer2.jpg"
+    featured_image = "/img/blog/ringbuffer2.jpg"
 +++
 
-![class](/img/blog/rinbuffer2.jpg)
+![class](/img/blog/ringbuffer2.jpg)
 In [Part 1](ClassesInCpp) we covered the fundamental building blocks: classes, functions, constructors and how to organize code into header and implementation files. We created a simple `Person` class to illustrate these concepts and now it is time to apply what we learned to our main project: The RingBuffer.
 Remember, our ring buffer needs to do a few key things: store elements, track where to add the next one, and know when it's full. Let's begin by creating a class.
 
