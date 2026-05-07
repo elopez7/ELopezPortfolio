@@ -221,4 +221,13 @@ T& operator*() const{
     return rb_->buffer_[(rb_->head_ + index_) % N];
 }
 ```
-The `*` allows the iterator access to the element at the iterator's current position. The RingBuffer is a special case, so we had to define a special operation. We must provide logical to physical mapping, this means that the "first" element is not always at array index `0`
+The `*` allows the iterator access to the element at the iterator's current position. The RingBuffer is a special case, so we had to define a special operation. We must provide logical to physical mapping, this means that the "first" element is not always at array index `0`, it is at `head_`. To find the actual element, the code takes the logical `index_` (0,1,2,3...), adds it to the physical `head_` and applies the modulo operator (`% N`). This ensures that if the iteration "walks off" the end of the physical array, it wraps back around to the beginning correctly.
+
+# Prefix Increment: iterator& operator++()
+```cpp
+iterator& operator++(){
+    ++index_; //Move to the next logical element
+    return *this;
+}
+```
+The `++` operator advances the iterator's logical `index_` by 1 (0 to 1 to 2 to 3...) and returns a reference to itself (`*this`) which avoids unnecesary copies.
