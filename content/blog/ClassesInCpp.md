@@ -6,10 +6,10 @@ type = "blog"
 tags = ["programming", "posts", "articles", "C++", "classes"]
 
 [images]
-    featured_image = "/img/blog/class.jpeg"
+    featured_image = "/img/blog/rinbuffer1.jpg"
 +++
 
-![class](/img/blog/class.jpeg)
+![class](/img/blog/rinbuffer1.jpg)
 Hello! If you recall from the previous series, we built a program that handled text input, stored numbers into a vector and performed calculations. However there were some concepts in there that we used, but that I didn't really explain. I am referring to **iterators**. In this new series I aim to go over what they are, how they work and how to use them, so get ready because it will be a bumpy ride and as usual, we will have to build our way there because fundamentals are always important.
 
 # The Project:

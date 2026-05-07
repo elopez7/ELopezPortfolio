@@ -6,10 +6,10 @@ type = "blog"
 tags = ["programming", "posts", "articles", "C++", "classes"]
 
 [images]
-    featured_image = "/img/blog/class.jpeg"
+    featured_image = "/img/blog/ringbuffer3.jpg"
 +++
 
-![class](/img/blog/class.jpeg)
+![class](/img/blog/ringbuffer3.jpg)
 In [Part 2](ClassesInCpp2) we built a buffer that works, however it is stuck with `unsigned int` and size 8, but what if we wanted to use it with `std::string` or custom types like game events, or only store the last 4 frames? Do we write a buffer per class? We could, but that would be a nightmare, wouldn't it?
 
 # Meet Templates

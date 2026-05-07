@@ -6,10 +6,10 @@ type = "blog"
 tags = ["programming", "posts", "articles", "C++", "input"]
 
 [images]
-    featured_image = "/img/blog/inputbasics.jpeg"
+    featured_image = "/img/blog/inputbasics.jpg"
 +++
 
-![Input Basics](/img/blog/inputbasics.jpeg)
+![Input Basics](/img/blog/inputbasics.jpg)
 In your programming journey, have you ever reached a point where you feel overwhelmed with everything a language can do, leaving you unsure of what to learn first or which features are truly important? I find myself in that exact situation. With each new C++ standard, I feel like I'm falling behind. Here we are in 2025, and I'm still trying to master move semantics and how to best use smart pointers. Learning a language with a rich history like C++ can be grueling. I've noticed I often get mesmerized by what's new, shiny, and exciting, causing me to neglect the fundamentals.
 That's what this post is about: practicing some of the fundamentals of the language and its standard library.
 In this new series, I will explore the basics of the `<iostream>` library.

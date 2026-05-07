@@ -6,10 +6,10 @@ type = "blog"
 tags = ["programming", "posts", "articles", "C++", "input"]
 
 [images]
-    featured_image = "/img/blog/inputbasics.jpeg"
+    featured_image = "/img/blog/inputvalidation.jpg"
 +++
 
-![Input Validation](/img/blog/input_validation.png)
+![Input Validation](/img/blog/inputvalidation.jpg)
 
 In [Part 1](InputBasicsCPP-1) of this series I covered some C++ fundamentals by building a small unit converter. While the program worked, it had a critical weakness: it assumed the "happy path," where users never make mistakes. In the real world, things are messy, and as programmers, we have to anticipate how our applications might fail. We can't predict everything, but we can certainly guard against the most common issues.
 
