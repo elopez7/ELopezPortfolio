@@ -230,4 +230,12 @@ iterator& operator++(){
     return *this;
 }
 ```
-The `++` operator advances the iterator's logical `index_` by 1 (0 to 1 to 2 to 3...) and returns a reference to itself (`*this`) which avoids unnecesary copies.
+The `++` operator advances the iterator's logical `index_` by 1 (0 to 1 to 2 to 3...) and returns a reference to itself (`*this`) which avoids unnecesary copies required by the postfix `it++`.
+
+# Inequality: bool operator!=()
+```cpp
+bool operator!=(const iterator& alarm) const{
+    return index_ != alarm.index_; //Compare logical positions
+}
+```
+The range-based for loop uses this to determine when to stop. It comparest the current iterator's logical position with the "past the end" sentinel `end()`. In our buffer `end()` return an iterator with `index_` equal to `count_`. This operator will terminate the loop when the iterator has processed every valid element in the buffer.
