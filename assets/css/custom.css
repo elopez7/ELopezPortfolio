@@ -1,0 +1,17 @@
+/* Style Markdown-generated tables in blog content */
+#blog-single table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+#blog-single table th,
+#blog-single table td {
+    padding: 0.5rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+#blog-single table thead th {
+    border-bottom-width: 2px;
+    background-color: var(--bs-tertiary-bg, #f8f9fa);
+}
