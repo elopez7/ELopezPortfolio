@@ -293,3 +293,11 @@ Our RingBuffer has come a long way. In [part 1](ClassesInCpp) we started with th
 
 ## What's Next?
 Our buffer is correct, but it is not yet complete. Right now, every element we store is copied into the buffer, which is fine for an `int`, but not great for types such as `std::string`. In the next post we will tackle move semantics and round out the interface with a few utility methods to make our RingBuffer ready for real-world use.
+
+# References / Sources
+
+- [cv (const and volatile) type qualifiers](https://en.cppreference.com/w/cpp/language/cv)
+- [The this pointer](https://en.cppreference.com/w/cpp/language/this)
+- [Overload resolution](https://en.cppreference.com/w/cpp/language/overload_resolution)
+- [const correctness (isocpp FAQ)](https://isocpp.org/wiki/faq/const-correctness)
+- [std::vector::cbegin / cend](https://en.cppreference.com/w/cpp/container/vector/begin)

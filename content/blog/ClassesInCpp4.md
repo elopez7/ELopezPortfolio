@@ -495,3 +495,12 @@ void print_contents(const RingBuffer<int, 8>& buf)
 }
 ```
 The compiler will not allow it. Our `begin()` and `end()` are not `const` qualified, which means they can't be called on a `const` object. In the next post we will fix this by introducing `const_iterator`, an iterator that promises not to modify the elements it visits.
+
+# References / Sources
+
+- [Iterators](https://en.cppreference.com/w/cpp/iterator)
+- [std::iterator_traits](https://en.cppreference.com/w/cpp/iterator/iterator_traits)
+- [Iterator tags](https://en.cppreference.com/w/cpp/iterator/iterator_tags)
+- [Range-based for loop](https://en.cppreference.com/w/cpp/language/range-for)
+- [Operator overloading](https://en.cppreference.com/w/cpp/language/operators)
+- [friend declaration](https://en.cppreference.com/w/cpp/language/friend)
