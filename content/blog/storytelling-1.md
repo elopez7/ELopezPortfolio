@@ -10,11 +10,11 @@ tags = ["storytelling", "posts", "articles"]
 +++
 
 ![Story arc](/img/blog/story_arc.jpg)
-Storytelling is one of the most underrated skills anyone can have. It lies at the center of our lives—even if we don’t notice it. Storytelling is how we teach, learn, and evolve. Narrative helps us focus. It is everywhere.
+Storytelling is one of the most underrated skills anyone can have. It lies at the center of our lives even if we don’t notice it. Storytelling is how we teach, learn, and evolve. Narrative helps us focus. It is everywhere.
 
 - Do you want to impress girls? Tell them a good story.
 - Do you want to be successful in a job interview? Connect with your interviewer by telling a good story instead of mindlessly spitting out facts.
-- Do you want to teach programming so that your students learn and remember? Tell them programming-related stories.
+- Do you want to teach programming so that your students learn and remember? Tell them programming related stories.
 
 In this series of articles, I aim to share the basics of what I have learned about starting your journey as a storyteller.
 
@@ -24,15 +24,15 @@ In 1984, Apple released a commercial that was seen as revolutionary because it d
 
 > I am not trying to sell a product; I am trying to sell a philosophy. – Steve Jobs
 
-Immediately after that, the “Think Different” philosophy was born, telling customers that Apple is a brand for people who think differently. This opened the floodgates for every product Apple released—not just computers. Apple was not a company, but a lifestyle.
+Immediately after that, the “Think Different” philosophy was born, telling customers that Apple is a brand for people who think differently. This opened the floodgates for every product Apple released not just computers. Apple was not a company, but a lifestyle.
 
-In his “How Great Leaders Inspire Action” talk, Simon Sinek explains how—and, more importantly, why—Apple and similar companies are successful at what they do. Apple is a computer company, just like Microsoft. What makes them different, then? The secret lies in how Apple communicates its ideas; instead of telling people what they do or how they do it, they start with why they do it.
+In his “How Great Leaders Inspire Action” talk, Simon Sinek explains how and, more importantly, why. Apple and similar companies are successful at what they do. Apple is a computer company, just like Microsoft. What makes them different, then? The secret lies in how Apple communicates its ideas; instead of telling people what they do or how they do it, they start with why they do it.
 
 ![Example image](/img/blog/why_graph.jpg)
 
 > “Everything we do, we believe in challenging the status quo. We believe in thinking differently. The way we challenge the status quo is by making our products beautifully designed, simple to use, and user friendly. We just happen to make great computers—wanna buy one?” – Apple (Taken from Simon Sinek’s talk)
 
-We all know what we do; some of us know how we do it, but almost none of us know why we do what we do. This is what makes inspiring leaders different from everyone else—they can communicate why they do what they do. Ultimately, the goal is to do business with people who believe what you believe.
+We all know what we do; some of us know how we do it, but almost none of us know why we do what we do. This is what makes inspiring leaders different from everyone else, they can communicate why they do what they do. Ultimately, the goal is to do business with people who believe what you believe.
 
 ## You Must Start With Why
 
@@ -57,7 +57,7 @@ As you tell the story about the most embarrassing thing that just happened to yo
 - Put those characters in interesting places.
 - Present foreign situations, as people often dream of things they cannot possess.
 
-Now, it is important to mention that the hook is also a promise. “Today, the most embarrassing thing ever just happened to me…” is the promise you are making to your audience—you will tell them about that embarrassing incident. If you start with your promise (your why), your job now is to tell the best story you can so that, by the end, it lives up to that promise.
+Now, it is important to mention that the hook is also a promise. “Today, the most embarrassing thing ever just happened to me…” is the promise you are making to your audience you will tell them about that embarrassing incident. If you start with your promise (your why), your job now is to tell the best story you can so that, by the end, it lives up to that promise.
 
 # References / Sources
 
