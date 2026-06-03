@@ -10,7 +10,7 @@ tags = ["programming", "posts", "articles", "C++", "classes"]
 +++
 
 ![class](/img/blog/ringbuffer7.jpg)
-In [part 6](ClassesInCpp6) we closed by pointing towards move semantics. In this post we will tackle the inefficiency of unnecessary copying, which happens when we create a temporary object, copy it into a container and then destroy the original. We acknowledged that this process is wasted work and in our RingBuffer it happens because our `push_back` implementation only supports copying, even then the source is a temporary object.
+In [part 6](ClassesInCpp6) we closed by pointing towards move semantics. In this post we will tackle the inefficiency of unnecessary copying, which happens when we create a temporary object, copy it into a container and then destroy the original. We acknowledged that this process is wasted work and in our RingBuffer it happens because our `push_back` implementation only supports copying, even when the source is a temporary object.
 Consider the following:
 ```cpp
 struct LoudHeavy{
@@ -52,7 +52,7 @@ Pushing Temporary:
 Done
  [Dtor] Destroyed 1
 ```
-Here is what is happening, we are first constructing a temporary object on the stack, then we are copying that temporary object into the RingBuffer's memory and then the temporary object is destroyed because the copying is done. We are essentially paying for two separate allocations for the `int` array, one for the temporary object and one for the buffer element. We spent CPU cycles manually moving 4000 bytes from the stack to the buffer, only to delete the source bytes immediately after. On some systems, these unnecesary allocations can be hundreds of times more expensive than simple function calls. This is an overhead that can be avoided if we implement move semantics.
+Here is what is happening, we are first constructing a temporary object on the stack, then we are copying that temporary object into the RingBuffer's memory and then the temporary object is destroyed because the copying is done. We are essentially paying for two separate allocations for the `int` array, one for the temporary object and one for the buffer element. We spent CPU cycles manually moving 4000 bytes from the stack to the buffer, only to delete the source bytes immediately after. On some systems, these unnecessary allocations can be hundreds of times more expensive than simple function calls. This is an overhead that can be avoided if we implement move semantics.
 
 # What Does "move" Mean?
 For our context, we define "move" as transferring ownership of resources, such as heap memory or file handles from a source object to a target object instead of duplicating them. The generic explanation is as follows; the target "steals" the internal pointers and state from the source, the source is then reset to "valid, but unspecified" state, usually empty or null, so that its destructor doesn't release the stolen memory. For our `RingBuffer`, "moving" is what makes the difference between allocating 4000 bytes for a fresh `int` array copy versus just copying an 8-byte pointer. This is the basis of move semantics.
@@ -86,7 +86,7 @@ int main()
     ref = 50;     // `ref` is an alias for the lvalue `x`
 
     //5. String literals are lvalues (unlike any other literal)
-    const char* str{"Hi"};  //: "Hi" is a string literal and has an address
+    const char* str{"Hi"};  // "Hi" is a string literal and has an address
 }
 ```
 
@@ -116,12 +116,12 @@ int main()
 
     // --- What you CANNOT do with rvalues
     // int* p = &42;        // ERROR: Cannot take the address of an rvalue
-    // (x+1) = 10;          // ERROR: x + 1 is a prvalue int, not assignable to a prvalue
+    // (x+1) = 10;          // ERROR: x + 1 is a prvalue int, not assignable
     
     return 0;
 }
 ```
-## Beyong lvalues and rvalues
+## Beyond lvalues and rvalues
 In the example above you may have noticed that we are referring to something more than just rvalues. What happens is that in C++ values have different categories depending on how they are used.
 ### prvalue (Pure rvalue)
 Represents an expression that initializes an object. They don't have names or a persistent memory location. Because they are generally short lived, we are allowed to "move" their resources instead of performing copying operations on them. `45`, `true` or `nullptr` are examples of prvalues. Consider the following:
@@ -284,7 +284,7 @@ Pushing Temporary:
 Done
  [Dtor] Destroyed 1
 ```
-Success! We have now successfully moved resources from a source into a target, but there is still a question. What really happens to the source object? What does it mean when we say valid, but unspefied state?
+Success! We have now successfully moved resources from a source into a target, but there is still a question. What really happens to the source object? What does it mean when we say valid, but unspecified state?
 ## Valid But Unspecified
 As we know, moved-from-state happens when an object's resources have been transferred to another object via move constructor or move assignment. The source object, in other words, the object we moved the resources from remains valid, this means that the object still exists and can still be used without causing any undefined behavior, but we say it is unspecified because although the object is still there, its members MIGHT have been zeroed or in the case of `std::string` or `std::vector` they would be left empty. Notice that we say MIGHT because this is implementation dependent.
 The object itself can still be assigned a new value.
@@ -372,6 +372,11 @@ public:
         const RingBuffer* rb_;
         std::size_t index_;
     };
+    
+    RingBuffer(const RingBuffer&) = delete;
+    RingBuffer(RingBuffer&) = delete;
+    RingBuffer& operator=(const RingBuffer&) = delete;
+    RingBuffer& operator=(RingBuffer) = delete;
 
     //Existing non-const iterators for modification
     iterator begin() { return iterator(this, 0); }    //First element
@@ -410,8 +415,6 @@ private:
     std::size_t count_;                             //Total number of elements in the buffer
 };
 
-//Now, everywhere where we had the harcoded 8 can be update to use N
-
 template <typename T, std::size_t N>
 RingBuffer<T, N>::RingBuffer() : head_{}, tail_{}, count_{} {}
 
@@ -444,7 +447,7 @@ void RingBuffer<T, N>::push_back(const T& new_element)
         head_ = (head_ + 1) % N;
     }
     else {
-        //Increment countif we are not ovewriting
+        //Increment count if we are not ovewriting
         ++count_;
     }
 
@@ -508,16 +511,16 @@ std::size_t RingBuffer<T, N>::size() const
 ## pass-by-value + std::move
 We can combine pass by value with `std::move`. This is an alternative that allows us to avoid boilerplate of maintaining multiple overloads. This will allow us to have a single, unified function, but it will come with the cost of an extra move operation for every call. An lvalue argument will result in one copy and one move, while an rvalue will result in two moves. Consider the following:
 ```cpp
-template<typnename T, std::size_t N>
+template<typename T, std::size_t N>
 void RingBuffer<T, N>::push_back(T new_element){ //Accepted by value
     if(count_ == N){
         slot(0)->~T();
         head_ = (head_ + 1) % N;
     }else{
-        ++count;
+        ++count_;
     }
     //Move the local 'new_element' into the buffer
-    new (slot(count_ -1)) T(std::move(new_element));
+    new (slot(count_ - 1)) T(std::move(new_element));
     tail_ = (tail_ + 1) % N;
 }
 ```
@@ -530,8 +533,8 @@ While we got rid of a wasteful copy, there are some other things we need to take
 ```cpp
 rb.push_back(LoudHeavy{1});
 ```
-In this code we are building a temporary `LoudHeavy{1}`, then move it into the slot. The copy is gone, yes, but the temporary and themove are still there, one construction on the stack and one move into the buffer. In Part 8 we will remove that with `emplace_back()` which constructs the element directly in the slot. We will also look into variadic templates and perfect forwarding.
-But that's not all! Our `RingBuffer` still does not have a propr copy and move constructors, so we will explore the rule of 5, then we will talk about reverse iterators and then we will implement a few utility methods like `back()`, `clear()` and `capacity()`.
+In this code we are building a temporary `LoudHeavy{1}`, then move it into the slot. The copy is gone, yes, but the temporary and the move are still there, one construction on the stack and one move into the buffer. In Part 8 we will remove that with `emplace_back()` which constructs the element directly in the slot. We will also look into variadic templates and perfect forwarding.
+But that's not all! Our `RingBuffer` still does not have a proper copy and move constructors, so we will explore the rule of 5, then we will talk about reverse iterators and then we will implement a few utility methods like `back()`, `clear()` and `capacity()`.
 
 # References / Sources
 

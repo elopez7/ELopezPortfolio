@@ -816,7 +816,7 @@ void RingBuffer<T, N>::push_back(const T& new_element)
         head_ = (head_ + 1) % N;
     }
     else {
-        //Increment countif we are not ovewriting
+        //Increment count if we are not overwriting
         ++count_;
     }
 
