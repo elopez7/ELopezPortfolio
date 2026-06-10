@@ -10,7 +10,7 @@ tags = ["programming", "posts", "articles", "C++", "classes"]
 +++
 
 ![class](/img/blog/ringbuffer8.jpg)
-We closed [part 7](ClassesInCpp7) with some unfinished business, recall that `push_back(T&&)` still builds a temporary object and then moves it. Consider the output of our last example:
+<br>We closed [part 7](ClassesInCpp7) with some unfinished business, recall that `push_back(T&&)` still builds a temporary object and then moves it. Consider the output of our last example:
 ```
 Pushing Temporary:
    [Ctro] Created 1
