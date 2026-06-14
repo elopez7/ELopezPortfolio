@@ -1,6 +1,6 @@
 +++
 title = "Ring Buffer Series Part 9 — The Rule of Five - deep copies & noexcept"
-date = "2026-06-11T12:00:42+02:00"
+date = "2026-06-12T12:00:42+02:00"
 draft = false
 type = "blog"
 tags = ["programming", "posts", "articles", "C++", "classes"]
@@ -114,7 +114,7 @@ It pretty much needs to custom define all five and in our case, we have a custom
 Before we write any of them, we must ask ourselves: what state actually defines our buffer? Up to now we have been carrying three members: `head_`, `tail_` and `count_`. If we look closely though, `tail_` is never actually read anywhere. Our `slot()` helper computes every position from `head_ + i`, `pop_front` only advances `head_`, and fullness is decided by `count_`. We have been updating `tail_` on every push for no reason at all, it is dead state left over from an earlier design. So the first change we make is to delete it. From here on the buffer has only `head_` and `count_`.
 
 That leaves one decision for the copy: should it reproduce the source's physical layout (the same `head_` offset, elements sitting in the same byte slots) or should it normalize, resetting `head_` to zero and laying the live elements out from the start of the buffer? Both produce a buffer with identical logical contents, but normalizing is cleaner. The physical offset is an implementation detail that nothing outside the class should care about, and replicating it would just be copying bookkeeping for its own sake. So we normalize. A way to think about it is two ring buffers are equal when they hold the same elements in the same order, not when their bytes match.
-![ShallowCopy](/img/blog//CopyNormalized.jpg)
+![CopyNormalized](/img/blog//CopyNormalized.jpg)
 ### Copy Constructor
 ```cpp
 template <typename T, std::size_t N>
@@ -153,7 +153,7 @@ The source is walked logically with `other.slot(i)`, which accounts for its `hea
         return *this;
     }
 ```
-The code above is not the way a copy assignment operator is usually written. In C++ there is something called the copy-and-swap idiom, which is the standard practice, but unfortunately, this is one of those cases where we need to deviate from standard practices, let's explore why that is
+The code above is not the way a copy assignment operator is usually written. In C++ there is something called the copy-and-swap idiom, which is the standard practice, but unfortunately, this is one of those cases where we need to deviate from standard practices, let's explore why that is.
 
 #### copy-and-swap Idiom
 The trick is to write a single assignment operator whose parameter is taken by value:
@@ -467,7 +467,7 @@ public:
     iterator begin() { return iterator(this, 0); }    //First element
     iterator end() { return iterator(this, count_); } //Past-the-end sentinel
 
-    //Const overload for read-only contexts like `print_contents`
+    //Const overload for read-only contexts like `print_buffer`
     const_iterator begin() const { return const_iterator(this, 0); }
     const_iterator end() const { return const_iterator(this, count_); }
 
