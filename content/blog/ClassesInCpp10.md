@@ -9,7 +9,7 @@ tags = ["programming", "posts", "articles", "C++", "classes"]
     featured_image = "/img/blog/ringbuffer10.jpg"
 +++
 
-![class](/img/blog/ringbuffer10.jpg)
+![buffer10](/img/blog/ringbuffer10.jpg)
 <br>At the end of [part 9](ClassesInCpp9) we realized that our buffer still had one issue. Our copy constructor placement-news each element one at a time; if the third of five copies throws, the first two are already built, but because the *constructor itself* failed, the object's destructor will never run, and those two elements leak. The same fragility lives in `push_back` and `emplace_back`: we increment `count_` *before* we construct the element, so a throwing constructor leaves the buffer believing it holds an object that was never built, and our destructor will later walk into that slot and try to destroy it.
 ![OneThrow](/img/blog/OneThrow.jpg)
 
